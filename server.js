@@ -20,7 +20,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/mydb");
+mongoose.connect("mongodb+srv://jayas9239:jayasharma@cluster0.aozsogp.mongodb.net/mydb"); //mongodb://localhost:27017/mydb
 
 const bookSchema=new mongoose.Schema({
     name:String,

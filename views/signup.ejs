@@ -10,7 +10,7 @@
 <body>
     <div class="form-container">
         <h1>Signup</h1>
-        <form method="post">
+        <form method="post" name="myform" onsubmit = " return isValid()">
             <div class="form-group">
                 <label for="name">Username : </label>
                 <input type="text" id="name" name="username" placeholder="Enter username" required>
@@ -19,9 +19,48 @@
                 <label for="password">Password : </label>
                 <input type="password" id="password" name="password" placeholder="Enter password" required>
             </div>
-            <button type="submit" class="submit-btn">Signup</button>
+            <button type="submit" class="submit-btn" >Signup</button>
         </form>
 
     </div>
+    <script>
+        
+
+      const username = document.getElementById('name');
+      const pswd = document.getElementById('password');
+
+        const isValid = () => {
+
+           
+
+            const nameval = username.value.trim();
+            const passval = pswd.value.trim();
+
+            //validating username
+            if(nameval === ""){
+                alert("Username cannot be empty");
+                return false;
+            }
+            else if(nameval.length< 5){
+                alert("Username must be atleast 5 characters");
+                return false;
+            }
+            else if(passval === ""){
+                alert("password cannot be empty");
+                return false;
+            }
+            else if(passval.length< 5){
+                alert("Password must be atleast 8 characters");
+                return false;
+            }
+            else{
+                return true;
+            }
+           
+        }
+
+
+        
+    </script>
 </body>
 </html>
