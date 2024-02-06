@@ -81,7 +81,7 @@ app.get("/directory",function(req,res){
           res.redirect("/directory");
               }
               else{
-              res.render("directory", {newListItems: result});}
+              res.render("directory", {newListItems: result});} //sending newListItems to directory
               })
         }
     else{
@@ -126,7 +126,7 @@ app.post("/signup",function(req,res){
     User.register({username:req.body.username},req.body.password,function(err,user){
         if(err){
             console.log(err);
-            res.redirect("/signup");
+            res.send("Username already present");
         }
         else{
             passport.authenticate("local")(req,res,function(){
@@ -173,19 +173,26 @@ app.post("/search",function(req,res){
     })
 })
 
-app.get("/edit",function(req,res){
-    res.render("edit");
+//app.get("/edit",function(req,res){
+  //  res.render("edit");
+//});
+
+app.post('/edits', function(req,res){
+    const id = req.body.editbook;
+    Book.find({_id : id}).then((result) => {
+        res.render('edit', {newname : result[0].name, newauthor: result[0].author, newpage: result[0].pages, id:id});
     });
+});
     
-    app.post("/edit",function(req,res){
-        Book.updateOne({name:req.body.bookname},{$set:{name:req.body.newbookname,author:req.body.newauthorname,pages:req.body.newpages}}).then((result)=>{
-            console.log(result.acknowledged);
-            if(result.matchedCount>=1){res.redirect("/directory")}
-            else{
-                res.send("no such book found in the directory")
-            }
-        })
+app.post("/edit",function(req,res){
+    Book.updateOne({_id: req.body.id},{$set:{name:req.body.newbookname,author:req.body.newauthorname,pages:req.body.newpages}}).then((result)=>{
+        console.log(result.acknowledged);
+        if(result.matchedCount>=1){res.redirect("/directory")}
+        else{
+            res.send("no such book found in the directory")
+        }
     })
+});
 
 
 app.listen(3000, () => {

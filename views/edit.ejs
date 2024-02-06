@@ -4,22 +4,22 @@
 </head>
 
 
-body{
+<body>
     <%- include("header") -%>
     <div class="form-container">
         <h1 style="margin-bottom: 20px;">Update</h1>
         <form action="/edit" method="post">
             <div class="form-group">
-                <input type="text" name="bookname" placeholder="Insert book name to search for">
+                <input type="text" name="newbookname" value="<%= newname %>">
             </div>
             <div class="form-group">
-                <input type="text" name="newbookname" placeholder="Insert the updated name">
+                <input type="text" name="newauthorname" value="<%= newauthor %>">
             </div>
             <div class="form-group">
-                <input type="text" name="newauthorname" placeholder="Insert the updated author">
+                <input type="number" name="newpages" value="<%= newpage %>">
             </div>
             <div class="form-group">
-                <input type="number" name="newpages" placeholder="Insert the updated page numbers">
+                <input type="hidden" name="id" value="<%= id %>">
             </div>
             
             <button type="submit" class="submit-btn">Update</button>
@@ -29,4 +29,4 @@ body{
 
 <%- include("footer") -%>
 
-}
+</body>
